@@ -20,7 +20,7 @@ AD-VAE aims to tackle this challenge and aid Alzheimer's research by using Varia
 
 **License:** OSI Approved - MIT License
 
-**Environment:** Recommeded to have Great Lakes HPC access for GPU usage
+**Environment:** Recommended to have Great Lakes HPC access for GPU usage
 
 
 

@@ -1,17 +1,44 @@
-### Dataset Information:
+# Dataset Information:
 
-This model will be trained primarily on gene expression data.
+This model will be trained on multimodal data.
 
-Input: Gene Expression profiles (transcriptomics data) from AD and non-AD samples
+### Gene Expression Data:
 
-Possible additional functionality: Train the model using multimodal data (EEGs etc.). 
-In such a case, additional inputs will be EEGs from AD and non-AD individuals.
+**Input:** Gene expression profiles (transcriptomics data) from AD individuals.
 
-Data format:
-- 2D Matrix with genes and samples as rows and columns
+**Data Format:**
+- .csv file with genes and samples as rows and columns > 2D tensors
 
-Gene expression data can be obtained from (non-exhaustive): (search for AD specific data form following sources)
+**Sources:**
 
-https://www.ncbi.nlm.nih.gov/geo/browse/
+NCBI GEO: https://www.ncbi.nlm.nih.gov/gds/
+EMBL-EBI: https://www.ebi.ac.uk/biostudies/arrayexpress/studies
+AD Knowledge Portal: https://adknowledgeportal.synapse.org/Explore/Programs/DetailsPage?Program=Resilience-AD
 
-https://openneuro.org/datasets/ds004504/versions/1.0.8
+
+
+### EEG Data:
+
+**Input:** Electroencephalogram data obtained from AD individuals.
+
+**Data Format:**
+- .edf file with successive rows corresponding to successive time slices and each column of the data file corresponding to to an individual sensor location or other information tag.
+
+**Sources:**
+
+OpenNeuro: https://openneuro.org/datasets/ds004504/versions/1.0.8
+TUH EEG corpus: https://isip.piconepress.com/projects/tuh_eeg/
+
+
+
+### MRI Data:
+
+**Input:** Magnetic Resonance Imaging data obtained from AD individuals.
+
+**Data Format:**
+- NIfTI format or .nii format 
+
+**Sources:**
+
+WashU OASIS: https://sites.wustl.edu/oasisbrains/home/oasis-3/
+OpenNeuro: https://openneuro.org/datasets/ds004504/versions/1.0.8
