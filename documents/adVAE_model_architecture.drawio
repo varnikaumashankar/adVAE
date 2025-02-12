@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36" version="26.0.11">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="984" dy="567" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="QpszFrfGD8zcTn5MAN17-0" value="&lt;span style=&quot;font-size: 18px;&quot;&gt;Input:&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;&amp;nbsp;Alzheimer&#39;s data (gene expression/EEG/ MRI)&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="317" y="100" width="194" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-7" value="&lt;br class=&quot;Apple-interchange-newline&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Output:&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;synthetic Alzheimer&#39;s data&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="317" y="728" width="194" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-14" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="189" y="267" width="449" height="399" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-9" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Encoder&lt;/font&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="317" y="305" width="194" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-11" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Latent Variables&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="334" y="439" width="160" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-13" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Decoder&lt;/font&gt;" style="shape=offPageConnector;whiteSpace=wrap;html=1;direction=west;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="317" y="544.5" width="194" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-15" value="&lt;span style=&quot;font-size: 18px;&quot;&gt;adVAE&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;model&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="182" y="450" width="124" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-16" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.57;dx=18.67;direction=south;notch=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="400" y="211" width="27" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-19" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.57;dx=18.67;direction=south;notch=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="400" y="638" width="27" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-22" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.57;dx=18.67;direction=south;notch=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="400.5" y="390" width="27" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="QpszFrfGD8zcTn5MAN17-24" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.57;dx=18.67;direction=south;notch=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="400" y="492" width="27" height="44" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

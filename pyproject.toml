@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adVAE"
+version = "0.1.0"
+description = "A Variational Autoencoder for generating synthetic biomedical data in Alzheimer's research."
+authors = [
+    { name = "Varnika Umashankar", email = "varnika@umich.edu" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "torch", 
+    "torchvision",
+    "matplotlib",
+    "seaborn",
+    "tqdm",
+    "scipy",
+    "nibabel", 
+    "mne",  
+    "umap-learn", 
+]
+
+[project.urls]
+repository = "https://github.com/varnikaumashankar/adVAE.git"
+
+[project.optional-dependencies]
+dev = [
+    "pytest"
+]
+
+[tool.setuptools]
+packages = ["adVAE"]
+
