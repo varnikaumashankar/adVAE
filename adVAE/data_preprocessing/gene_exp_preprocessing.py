@@ -40,8 +40,8 @@ def main():
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     
-    # Decompress the input file if is a .zip file
-    if input_file.endswith('.zip'):
+    # Decompress the input file if is a .zip file or .gz file
+    if input_file.endswith('.zip') or input_file.endswith('.gz'):
         decompress_file(input_file, output_path)
     
 if __name__ == '__main__':
