@@ -10,17 +10,28 @@ Deep learning models are becoming increasingly popular in the analysis of transc
 
 AD-VAE aims to tackle this challenge and aid Alzheimer's research by using Variational Autoencoders to synthesize artificial, high-quality multimodal data. 
 
+<br>
 
 **Input:** Biomedical data from AD individuals (gene expression, EEG, MRI).
 
 **Output:** A latent space that is capable of generating more artificial, high-quality multimodal data for AD research.
 
+<br>
 
-**Programming language:** Python 3.9.18
+**Programming language:** Python 3.10
 
 **License:** OSI Approved - MIT License
 
 **Environment:** Recommended to have Great Lakes HPC access for GPU usage
+
+<br>
+<br>
+
+### Initialization:
+
+**1. Create conda environment:** Ensure that your system has conda installed. On your terminal, run: `conda env create -f environment.yaml`.
+**2. Activate conda environment:** Run: `conda activate adVAE`.
+**3. Update dependencies in environment:** Run `conda env update -f environment.yaml`.
 
 
 

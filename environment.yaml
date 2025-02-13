@@ -1,0 +1,22 @@
+name: adVAE  
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10  
+  - numpy
+  - pandas
+  - scikit-learn
+  - scikit-image
+  - matplotlib
+  - seaborn
+  - biopython
+  - scipy
+  - pyyaml
+  - pytorch=2.2.0
+  - torchvision
+  - tqdm
+  - pip
+  - pip:
+      - torchsummary
