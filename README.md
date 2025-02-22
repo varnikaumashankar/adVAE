@@ -33,6 +33,13 @@ AD-VAE aims to tackle this challenge and aid Alzheimer's research by using Varia
 **2. Activate conda environment:** Run: `conda activate adVAE`.
 **3. Update dependencies in environment:** Run `conda env update -f environment.yaml`.
 
+### Tests:
+
+**Test functionality by running unit-tests:**
+1. Activate conda environment using `conda activate adVAE`.
+2. Ensure data is stored in <data_folder>, and that the path to it has been edited in adVAE/data_preprocessing/gene_exp_preprocess.py and tests/test_training.py
+3. Move to the root directory and run unit tests on the command line using `pytest tests/`.
+
 
 
 

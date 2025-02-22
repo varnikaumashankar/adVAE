@@ -25,21 +25,25 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+    "Operating System :: OS Independent"
 ]
 dependencies = [
     "numpy",
     "pandas",
     "scikit-learn",
-    "torch", 
+    "scikit-image",
+    "pytorch", 
     "torchvision",
     "matplotlib",
     "seaborn",
     "tqdm",
     "scipy",
+    "pyyaml",
+    "biopython",
     "nibabel", 
     "mne",  
-    "umap-learn", 
+    "umap-learn",
+    "pip"
 ]
 
 [project.urls]

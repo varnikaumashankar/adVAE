@@ -17,6 +17,11 @@ dependencies:
   - pytorch=2.2.0
   - torchvision
   - tqdm
-  - pip
+  - nibabel
+  - mne
+  - umap-learn
   - pip:
       - torchsummary
+      - GEOparse
+      - pylint
+      
