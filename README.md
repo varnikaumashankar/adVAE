@@ -8,7 +8,10 @@ Alzheimer's disease is a progressive neurodegenerative disease that primarily af
 Deep learning models are becoming increasingly popular in the analysis of transciptomic, multi-omic and other biomedical data aiding in research. However, a key challenge in training such models is their requirement for large datasets. High-quality clinical data for Alzheimer's patients is scarce, and hence, data augmentation is needed to address the challenges posed by small sample sizes.
 
 
-AD-VAE aims to tackle this challenge and aid Alzheimer's research by using Variational Autoencoders to synthesize artificial, high-quality multimodal data. 
+adVAE aims to tackle this challenge and aid Alzheimer's research by using Variational Autoencoders to synthesize artificial, high-quality multimodal. This will be done by sampling from adVAE's modeled latent space.
+
+
+Latent space refers to a lower-dimensional, compressed representation of complex, high-dimensional data. Instead of directly working with raw data, such as gene expression profiles, EEG signals, or MRI images, adVAE encodes the data into a latent space. This space captures the underlying features of the data in a more compact form while retaining the key information needed to reconstruct the original data by sampling. While many Python libraries exist, adVAE will be using PyTorch's framework to create the VAE architecture and perform the latent space modeling.
 
 <br>
 
@@ -16,6 +19,9 @@ AD-VAE aims to tackle this challenge and aid Alzheimer's research by using Varia
 
 **Output:** A latent space that is capable of generating more artificial, high-quality multimodal data for AD research.
 
+Each type of data will have its own dedicated model and pipeline, which means the data is processed and generated independently. This allows for tailored models for each type of data based on its specific characteristics.
+
+<br>
 <br>
 
 **Programming language:** Python 3.10
