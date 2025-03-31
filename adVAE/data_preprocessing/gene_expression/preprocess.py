@@ -47,8 +47,12 @@ def remove_duplicates(df, id_column="ProbeID"):
     Returns:
         df (pd.DataFrame): Dataframe with duplicates removed.
     """
+    if id_column not in df.columns:
+        print(f"Column '{id_column}' not found — skipping duplicate removal.")
+        return df
+    
     before = len(df)
-    df = df.drop_duplicates(subset=id_column, errors='ignore')
+    df = df.drop_duplicates(subset=id_column)
     after = len(df)
     print(f"Removed {before - after} duplicate entries.")
     return df
@@ -155,7 +159,7 @@ def save_processed_data(df, save_path="gene_expression.pt"):
         df.to_csv(save_path, index=False)
     else:
         raise ValueError("Unsupported file type. Use '.pt' or '.csv'.")
-    print(f"[INFO] Saved processed data to {save_path}")
+    print(f"Saved processed data to {save_path}")
 
 def preprocess_pipeline(data_folder="data/AMP_AD_MSBB_MSSM", scale_method = "standard", visualize = False, aggregate_by_gene = False, return_stats = False, plot_path = None, return_metadata = False, save_path = False):
     """

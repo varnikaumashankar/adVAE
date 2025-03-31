@@ -56,4 +56,11 @@ dev = [
 
 [tool.setuptools]
 packages = ["adVAE"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"adVAE" = [
+    "data/example_gene_expression/*.tsv",
+    "data/example_mri/*.gif"
+]
 
