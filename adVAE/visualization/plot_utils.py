@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%Y-%m-%d")
 
 def plot_loss_curve(loss_history, save_path=None, title="Training Loss"):
     plt.figure()

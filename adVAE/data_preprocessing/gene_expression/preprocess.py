@@ -4,7 +4,11 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import matplotlib.pyplot as plt
 import seaborn as sns
-import torch
+import pickle
+from sklearn.decomposition import PCA
+from datetime import datetime
+
+timestamp = datetime.now().strftime("%Y-%m-%d")
 
 # Hardcoding for AMP_AD_MSBB_MSSM gene expression files
 
@@ -22,7 +26,7 @@ def load_microarray_data(data_folder="data/AMP_AD_MSBB_MSSM", file_types=(".csv"
         file_types (tuple): Allowed file extensions. Default is (".csv", ".tsv").
 
     Returns:
-        combined_df (pd.DataFrame): Combined dataframe containing all loaded data.
+        pd.DataFrame: Combined dataframe containing all loaded data.
     """
     dfs = []
     for filename in os.listdir(data_folder):
@@ -33,8 +37,7 @@ def load_microarray_data(data_folder="data/AMP_AD_MSBB_MSSM", file_types=(".csv"
                 sep = ','
             df = pd.read_csv(os.path.join(data_folder, filename), sep=sep)
             dfs.append(df)
-    combined_df = pd.concat(dfs, axis=0, ignore_index=True)
-    return combined_df
+    return pd.concat(dfs, axis=0, ignore_index=True)
 
 def remove_duplicates(df, id_column="ProbeID"): 
     """
@@ -122,7 +125,8 @@ def scale_data(df, method="standard"):
         method (str): 'standard' or 'minmax' (default: 'standard').
 
     Returns:
-        df_scaled (pd.DataFrame): Scaled dataframe.
+        scaler (StandardScaler or MinMaxScaler): Fitted scaler object.
+        scaled (np.ndarray): Scaled data as numpy array.
     """
     available_cols = [col for col in vae_feature_columns if col in df.columns]
     missing_cols = set(vae_feature_columns) - set(available_cols)
@@ -130,8 +134,7 @@ def scale_data(df, method="standard"):
         print(f"Missing columns: {missing_cols}")
     scaler = StandardScaler() if method == "standard" else MinMaxScaler()
     scaled = scaler.fit_transform(df[available_cols])
-    df_scaled = pd.DataFrame(scaled, columns=available_cols)
-    return df_scaled
+    return scaler, scaled
 
 def describe_data(df):
     """
@@ -145,41 +148,41 @@ def describe_data(df):
     """
     return df.describe()
 
-def save_processed_data(df, save_path="gene_expression.pt"):
+def run_pca(scaled_data, n_components=0.95):
     """
-    Save processed data to a .pt or .csv file.
+    Perform PCA on scaled data.
 
     Args:
-        df (pd.DataFrame): Preprocessed data.
-        save_path (str): Path to save file (.pt or .csv).
-    """
-    if save_path.endswith(".pt"):
-        torch.save(torch.tensor(df.values, dtype=torch.float32), save_path)
-    elif save_path.endswith(".csv"):
-        df.to_csv(save_path, index=False)
-    else:
-        raise ValueError("Unsupported file type. Use '.pt' or '.csv'.")
-    print(f"Saved processed data to {save_path}")
+        scaled_data (pd.DataFrame): Scaled data.
+        n_components (int): Number of PCA components to keep.
 
-def preprocess_pipeline(data_folder="data/AMP_AD_MSBB_MSSM", scale_method = "standard", visualize = False, aggregate_by_gene = False, return_stats = False, plot_path = None, return_metadata = False, save_path = False):
+    Returns:
+        X_pca (np.ndarray): PCA transformed data.
+        pca_model (PCA): Fitted PCA model.
+    """
+    pca_model = PCA(n_components=n_components)
+    X_pca = pca_model.fit_transform(scaled_data)
+    return X_pca, pca_model
+
+def preprocess_pipeline(n_components=0.95, data_folder="data/AMP_AD_MSBB_MSSM", scale_method = "standard", visualize = False, aggregate_by_gene = True, plot_path = None, save_dir="data/processed"):
     """
     Complete preprocessing pipeline for AMP_AD_MSBB_MSSM gene expression data.
 
     Args:
-        data_folder (str): Path to folder containing expression data files.
-        scale_method (str): 'standard' or 'minmax'. Defaults to 'standard'.
-        visualize (bool): If True, displays or saves boxplot.
-        aggregate_by_gene (bool): If True, aggregates multiple probes to one gene.
-        return_stats (bool): If True, returns summary statistics.
-        plot_path (str): Optional path to save boxplot image.
-        return_metadata (bool): If True, returns metadata columns.
-
-    Returns:
-        df_scaled (pd.DataFrame): Scaled data
-        describe_data(df_scaled) (pd.DataFrame) (optional): Descriptive stats
-        metadata (pd.DataFrame) (optional): Metadata
-    """
+        n_components (int): Number of PCA components.
+        data_folder (str): Path to folder containing gene expression files.
+        scale_method (str): Scaling method ('standard' or 'minmax').
+        visualize (bool): Whether to visualize distributions.
+        aggregate_by_gene (bool): Whether to aggregate by gene.
+        plot_path (str): Path to save distribution plot.
+        save_dir (str): Directory to save processed data.
     
+    Returns:
+        df (pd.DataFrame): Processed dataframe.
+        X_pca (np.ndarray): PCA transformed data.
+        scaler (StandardScaler or MinMaxScaler): Fitted scaler object.
+        pca_model (PCA): Fitted PCA model.
+    """
     df = load_microarray_data(data_folder)
 
     if not aggregate_by_gene:
@@ -192,35 +195,24 @@ def preprocess_pipeline(data_folder="data/AMP_AD_MSBB_MSSM", scale_method = "sta
     if visualize:
         visualize_distribution(df, output_path=plot_path)
 
-    df_scaled = scale_data(df, method=scale_method)
-    if return_metadata:
-        metadata = df[metadata_columns].copy() if all(col in df.columns for col in metadata_columns) else None
-        if metadata is None:
-            print("One or more metadata columns not found. Returning None for metadata.")
-        if return_stats:
-            return df_scaled, describe_data(df_scaled), metadata
-        return df_scaled, metadata
+    raw_path = os.path.join(save_dir, f"raw_gene_expression_{timestamp}.csv")
+    df.to_csv(raw_path, index=False)
 
-    if return_metadata:
-        metadata = df[metadata_columns].copy() if all(col in df.columns for col in metadata_columns) else None
-        if metadata is None:
-            print("One or more metadata columns not found. Returning None for metadata.")
-        if save_path:
-            if not os.path.isabs(save_path):
-                os.makedirs("data/processed", exist_ok=True)
-                save_path = os.path.join("data/processed", save_path)
-            save_processed_data(df_scaled, save_path)
-        if return_stats:
-            return df_scaled, describe_data(df_scaled), metadata
-        return df_scaled, metadata
+    scaler, scaled = scale_data(df, method=scale_method)
+    X_pca, pca_model = run_pca(scaled, n_components=n_components)
 
-    if return_stats:
-        if save_path:
-            if not os.path.isabs(save_path):
-                os.makedirs("data/processed", exist_ok=True)
-                save_path = os.path.join("data/processed", save_path)
-            save_processed_data(df_scaled, save_path)
-        return df_scaled, describe_data(df_scaled)
-    return df_scaled
+    np.save(os.path.join(save_dir, f"X_pca_{timestamp}.npy"), X_pca)
+    with open(os.path.join(save_dir, f"pca_model_{timestamp}.pkl"), "wb") as f:
+        pickle.dump(pca_model, f)
+    with open(os.path.join(save_dir, f"scaler_{timestamp}.pkl"), "wb") as f:
+        pickle.dump(scaler, f)
+
+    print(f"Saved raw CSV to {raw_path}")
+    print(f"Saved PCA-reduced data and models to {save_dir}")
+    return df, X_pca, scaler, pca_model
+
+if __name__ == "__main__":
+    preprocess_pipeline(data_folder="data/AMP_AD_MSBB_MSSM")
+
 
 

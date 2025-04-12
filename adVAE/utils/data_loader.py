@@ -5,15 +5,15 @@ from adVAE.data_preprocessing.mri.dataset import MRIDataset
 
 def load_gene_expression_data(data_path, batch_size=64, shuffle=True):
     """
-    Loads preprocessed gene expression data as a DataLoader.
+    Loads preprocessed gene expression data (.npy, .csv, or .pt) into a DataLoader.
 
     Args:
-        data_path (str): Path to the .pt or .csv file.
+        data_path (str): Path to the data file.
         batch_size (int): Number of samples per batch.
         shuffle (bool): Whether to shuffle the data.
 
     Returns:
-        DataLoader: PyTorch DataLoader for the dataset.
+        DataLoader: PyTorch DataLoader for the gene expression dataset.
     """
     dataset = GeneExpressionDataset(data_path)
     return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)

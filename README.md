@@ -51,9 +51,11 @@ python main.py --pipeline gene_expression --task generate
 
 python main.py --pipeline mri --task preprocess
 python main.py --pipeline mri --task train
+python main.py --pipeline mri --task grid_search
 python main.py --pipeline mri --task evaluate
 python main.py --pipeline mri --task visualize
 python main.py --pipeline mri --task generate
+
 ```
 
 All paths and parameters can be customized in `adVAE/config.py`.
