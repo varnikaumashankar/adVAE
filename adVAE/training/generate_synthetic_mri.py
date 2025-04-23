@@ -59,4 +59,4 @@ def generate_and_save(weights_path, latent_dim, num_samples, output_dir, data_pa
     print(f"Saved {num_samples} synthetic MRI GIFs to {output_dir}")
 
 if __name__ == "__main__":
-    generate_and_save(weights_path="results/mri/vae_weights_lat64_b0.1_lr0.001_{timestamp}.pth", latent_dim=64, num_samples=10, output_dir="results/mri/synthetic_mri_gifs")
+    generate_and_save(weights_path=f"results/mri/vae_weights_lat64_b0.1_lr0.001_{timestamp}.pth", latent_dim=64, num_samples=10, output_dir="results/mri/synthetic_mri_gifs")

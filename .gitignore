@@ -170,6 +170,12 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# adVAE project-specific ignore rules
+# adVAE project-specific ignore rules - ignore data (private) and results
 results/
 data/
+
+# Keep example data for runing tutorial
+!data/example_gene_expression/
+!data/example_gene_expression/**
+!data/example_mri/
+!data/example_mri/**

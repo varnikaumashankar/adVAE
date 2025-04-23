@@ -43,10 +43,12 @@ def generate_and_save(cfg):
     columns = ['k.all', 'k.in', 'k.out', 'k.diff', 'k.in.normed', 'k.all.normed', 'to.all',
         'to.in', 'to.out', 'to.diff', 'to.in.normed', 'to.all.normed', 'standard.deviation']
     df = pd.DataFrame(synthetic_real, columns=columns)
-    out_path = os.path.join(cfg["output_dir"], f"synthetic_gene_expression_{timestamp}.csv")
-    df.to_csv(out_path, index=False)
+    out_path = os.path.join(cfg["output_dir"], f"synthetic_gene_expression_{timestamp}.tsv")
+    df.to_csv(out_path, sep="\t", index=False)
     print(f"Generated {cfg['num_samples']} synthetic samples saved to {out_path}")
 
 if __name__ == "__main__":
     from adVAE.config import gene_expression as cfg
     generate_and_save(cfg)
+
+    

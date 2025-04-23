@@ -17,9 +17,13 @@ class TestModelForward(unittest.TestCase):
 
     def test_mri_vae_forward(self):
         model = MRIVAE(latent_dim=64)
-        x = torch.randn(4, 3, 128, 128)
+        x = torch.randn(4, 1, 128, 128)
         recon, mu, log_var = model(x)
         
-        self.assertEqual(recon.shape, (4, 3, 128, 128))
+        self.assertEqual(recon.shape, (4, 1, 128, 128))
         self.assertEqual(mu.shape, (4, 64))
         self.assertEqual(log_var.shape, (4, 64))
+
+if __name__ == "__main__":
+    unittest.main()
+

@@ -139,9 +139,8 @@ def evaluate_model(weights_path, data_path, latent_dim=64, batch_size=32, output
     print(f"Mean RMSE: {rmse_mean:.4f}")
     print(f"Mean MAE: {mae:.4f}")
 
-    plot_reconstruction_distribution(original, reconstructed, output_path=os.path.join(output_dir, "reconstruction_distribution_{timestamp}.png")) # plot the distribution of pixel values in the original and reconstructed images
 
-    histogram_comparison(original, reconstructed, output_path=os.path.join(output_dir, "histogram_comparison_{timestamp}.png")) # compare histograms to compare the distributions of pixel values
+    histogram_comparison(original, reconstructed, output_path=os.path.join(output_dir, f"histogram_comparison_{timestamp}.png")) # compare histograms to compare the distributions of pixel values
 
     real_vals = original.view(-1).numpy()
     fake_vals = reconstructed.view(-1).numpy()
@@ -152,5 +151,7 @@ def evaluate_model(weights_path, data_path, latent_dim=64, batch_size=32, output
     print(f"t-test: stat = {t_stat:.4f}, p = {t_p:.4e}") 
     print(f"KS-test: stat = {ks_stat:.4f}, p = {ks_p:.4e}")
 
+    plot_reconstruction_distribution(original, reconstructed, save_path=os.path.join(output_dir, f"reconstruction_distribution_{timestamp}.png")) # plot the distribution of pixel values in the original and reconstructed images
+
 if __name__ == "__main__":
-    evaluate_model(weights_path="results/mri/vae_weights_lat64_b0.1_lr0.001_{timestamp}.pth", data_path="data/processed/mri_{timestamp}.pt", latent_dim=64, batch_size=32)
+    evaluate_model(weights_path=f"results/mri/vae_weights_lat64_b0.1_lr0.001_{timestamp}.pth", data_path=f"data/processed/mri_{timestamp}.pt", latent_dim=64, batch_size=32)

@@ -57,7 +57,7 @@ def extract_slices_from_img(img_path, slice_range=(80, 100)):
     return slices
 
 
-def preprocess_pipeline():
+def preprocess_pipeline(load_example_data=False):
     """
     Preprocess the MRI data by loading metadata, extracting slices, and saving them.
     This function loads the metadata from a CSV file, filters for Alzheimer’s patients,
@@ -69,14 +69,24 @@ def preprocess_pipeline():
     Returns:
         None
     """
-    data_folder = "data/OASIS_1"
-    csv_file = "data/OASIS_1_Info/oasis_cross-sectional-5708aa0a98d82080.xlsx"
-    data_path = "data/processed/mri_{timestamp}.pt"
-
-    alzheimers_patients = load_metadata(csv_file)
     data = []
+
+    if load_example_data:
+        csv_file = "../data/OASIS_1_Info/oasis_cross-sectional-5708aa0a98d82080.xlsx"
+        alzheimers_patients = load_metadata(csv_file)
+        data_folder = "../data/OASIS_1"
+        data_path = "../data/example_mri/processed/example_mri.pt"
+
+        disc_nums = [1] # Only check disc1 when load_example_data is True
+    else:
+        csv_file = "data/OASIS_1_Info/oasis_cross-sectional-5708aa0a98d82080.xlsx"
+        alzheimers_patients = load_metadata(csv_file)
+        data_folder = "data/OASIS_1"
+        data_path = f"data/processed/mri_{timestamp}.pt"
+        disc_nums = range(1, 13)
+
     for pid in alzheimers_patients:
-        for disc_num in range(1, 13):
+        for disc_num in disc_nums:
             img_path = os.path.join(
                 data_folder, f"disc{disc_num}", pid,
                 "PROCESSED/MPRAGE/T88_111",

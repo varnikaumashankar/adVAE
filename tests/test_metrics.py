@@ -15,14 +15,17 @@ class TestMetrics(unittest.TestCase):
         self.assertGreater(loss.item(), 0)
 
     def test_reconstruction_accuracy(self):
-        x = torch.randn(5, 3, 128, 128)
+        x = torch.randn(5, 1, 128, 128)
         recon = x + 0.05 * torch.randn_like(x)
         acc = reconstruction_accuracy(x, recon, threshold=0.1)
         self.assertGreaterEqual(acc, 0)
         self.assertLessEqual(acc, 1)
 
     def test_mean_absolute_error(self):
-        x = torch.randn(5, 3, 128, 128)
+        x = torch.randn(5, 1, 128, 128)
         recon = x + 0.05 * torch.randn_like(x)
         mae = mean_absolute_error(x, recon)
         self.assertGreaterEqual(mae, 0)
+
+if __name__ == "__main__":
+    unittest.main()
