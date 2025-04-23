@@ -173,6 +173,10 @@ cython_debug/
 # adVAE project-specific ignore rules - ignore data (private) and results
 results/
 data/
+tutorials/results/
+data/example_gene_expression/processed
+data/example_mri/processed
+
 
 # Keep example data for runing tutorial
 !data/example_gene_expression/
